@@ -1,0 +1,23 @@
+{
+  "name": "react-native-wootab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woomedya/react-native-wootab.git"
+  },
+  "author": "woomedya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woomedya/react-native-wootab/issues"
+  },
+  "homepage": "https://github.com/woomedya/react-native-wootab#readme",
+  "dependencies": {
+    "react-native-tab-view": "^2.13.0",
+    "react-native-vector-icons": "^6.6.0"
+  }
+}
