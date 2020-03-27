@@ -26,19 +26,19 @@ export default class TabLayout extends React.Component {
                     route.icon ? <Icon
                         name={route.icon}
                         size={26}
-                        style={[styles.icon, active ? { color: this.props.activeLabelColor || color.LIGHT_PRIMARY, } : styles.inactive]}
+                        style={[styles.icon, active ? { color: this.props.activeIconColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveIconColor } || styles.inactive]}
                     /> : null
                 }
-                <Text style={[styles.label, { fontSize: this.props.fontSize || 14 }, active ? { color: this.props.activeLabelColor || color.WHITE, } : styles.inactive]}>{route.title}</Text>
-            </View>
+                <Text style={[styles.label, { fontSize: this.props.fontSize || 14 }, active ? { color: this.props.activeLabelColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveLabelColor } || styles.inactive]}>{route.title}</Text>
+            </View >
         );
     };
 
     renderTabBar = props => {
         return <TabBar
             {...props}
-            indicatorStyle={[styles.indicatorStyle, { color: this.props.darkPrimary, backgroundColor: this.props.lightPrimary || color.LIGHT_PRIMARY, }]}
-            style={[styles.tabbar, { backgroundColor: this.props.primaryColor || color.PRIMARY, width: this.state.windowWidth }]}
+            indicatorStyle={[styles.indicatorStyle, { color: this.props.indicatorColor || color.LIGHT_PRIMARY, backgroundColor: this.props.indicatorBackgroundColor || color.DARK_PRIMARY, }]}
+            style={[styles.tabbar, { backgroundColor: this.props.backgroundColor || color.PRIMARY, width: this.state.windowWidth }]}
             onTabPress={this.props.onTabPress}
             renderLabel={this.renderItem(props)}
             scrollEnabled={this.props.scrollEnabled}
