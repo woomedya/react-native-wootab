@@ -25,8 +25,8 @@ export default class TabLayout extends React.Component {
                 {
                     route.icon ? <Icon
                         name={route.icon}
-                        size={26}
-                        style={[styles.icon, active ? { color: this.props.activeIconColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveIconColor } || styles.inactive]}
+                        size={route.iconSize || 26}
+                        style={[this.props.iconStyle || styles.icon, active ? { color: this.props.activeIconColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveIconColor } || styles.inactive]}
                     /> : null
                 }
                 <Text style={[styles.label, { fontSize: this.props.fontSize || 14 }, active ? { color: this.props.activeLabelColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveLabelColor } || styles.inactive]}>{route.title}</Text>
