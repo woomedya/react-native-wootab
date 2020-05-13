@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Platform, Dimensions, Text } from "react-native";
+import { StyleSheet, SafeAreaView, Platform, Dimensions, Text } from "react-native";
 import { color } from './libs/utilities/color';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -21,7 +21,7 @@ export default class TabLayout extends React.Component {
         var currentIndex = navigationState.routes.map(x => x.title == route.title).indexOf(true);
         var active = currentIndex == this.state.index;
         return (
-            <View style={[styles.item]} >
+            <SafeAreaView style={[styles.item]} >
                 {
                     route.icon ? <Icon
                         name={route.icon}
@@ -30,7 +30,7 @@ export default class TabLayout extends React.Component {
                     /> : null
                 }
                 <Text style={[styles.label, { fontSize: this.props.fontSize || 14 }, active ? { color: this.props.activeLabelColor || color.LIGHT_PRIMARY, } : { color: this.props.inactiveLabelColor } || styles.inactive]}>{route.title}</Text>
-            </View >
+            </SafeAreaView >
         );
     };
 
