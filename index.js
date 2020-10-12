@@ -17,6 +17,14 @@ export default class TabLayout extends React.Component {
         };
     }
 
+    componentDidMount = () => {
+        Dimensions.addEventListener('change', newDimensions => {
+            screenWidth = newDimensions.window.width;
+            screenHeight = newDimensions.window.height;
+            this.setState({ windowWidth: screenWidth })
+        });
+    }
+
     renderItem = ({ navigationState, position, }) => ({ route }) => {
         var currentIndex = navigationState.routes.map(x => x.title == route.title).indexOf(true);
         var active = currentIndex == this.state.index;
@@ -42,7 +50,7 @@ export default class TabLayout extends React.Component {
             onTabPress={this.props.onTabPress}
             renderLabel={this.renderItem(props)}
             scrollEnabled={this.props.scrollEnabled}
-            tabStyle={this.props.scrollEnabled ? [{ width: (width / this.props.routes.length) }, {
+            tabStyle={this.props.scrollEnabled ? [{ width: (this.state.windowWidth / this.props.routes.length) }, {
                 paddingHorizontal: 2
             }] : undefined}
         />
@@ -63,7 +71,7 @@ export default class TabLayout extends React.Component {
                 renderScene={SceneMap(this.props.scanMap)}
                 renderTabBar={this.renderTabBar}
                 onIndexChange={this.indexChanged}
-                initialLayout={{ width: width }}
+                initialLayout={{ width: this.state.windowWidth }}
                 style={[styles.container, { width: this.state.windowWidth }]}
                 timingConfig={{ duration: 500, }}
             />
