@@ -12,17 +12,8 @@ export default class TabLayout extends React.Component {
         this.props = props;
         this.state = {
             index: 0,
-            windowWidth: width,
             routes: this.props.routes,
         };
-    }
-
-    componentDidMount = () => {
-        Dimensions.addEventListener('change', newDimensions => {
-            screenWidth = newDimensions.window.width;
-            screenHeight = newDimensions.window.height;
-            this.setState({ windowWidth: screenWidth })
-        });
     }
 
     renderItem = ({ navigationState, position, }) => ({ route }) => {
@@ -46,11 +37,11 @@ export default class TabLayout extends React.Component {
         return <TabBar
             {...props}
             indicatorStyle={[styles.indicatorStyle, { color: this.props.indicatorColor || color.LIGHT_PRIMARY, backgroundColor: this.props.indicatorBackgroundColor || color.DARK_PRIMARY, }]}
-            style={[styles.tabbar, { backgroundColor: this.props.backgroundColor || color.PRIMARY, width: this.state.windowWidth }]}
+            style={[styles.tabbar, { backgroundColor: this.props.backgroundColor || color.PRIMARY, width: this.getWidth() }]}
             onTabPress={this.props.onTabPress}
             renderLabel={this.renderItem(props)}
             scrollEnabled={this.props.scrollEnabled}
-            tabStyle={this.props.scrollEnabled ? [{ width: (this.state.windowWidth / this.props.routes.length) }, {
+            tabStyle={this.props.scrollEnabled ? [{ width: (this.getWidth() / this.props.routes.length) }, {
                 paddingHorizontal: 2
             }] : undefined}
         />
@@ -58,6 +49,10 @@ export default class TabLayout extends React.Component {
 
     indexChanged = index => {
         this.setState({ index });
+    }
+
+    getWidth = () => {
+        return this.props.width || width;
     }
 
     render() {
@@ -71,8 +66,8 @@ export default class TabLayout extends React.Component {
                 renderScene={SceneMap(this.props.scanMap)}
                 renderTabBar={this.renderTabBar}
                 onIndexChange={this.indexChanged}
-                initialLayout={{ width: this.state.windowWidth }}
-                style={[styles.container, { width: this.state.windowWidth }]}
+                initialLayout={{ width: this.getWidth() }}
+                style={[styles.container, { width: this.getWidth() }]}
                 timingConfig={{ duration: 500, }}
             />
         );
